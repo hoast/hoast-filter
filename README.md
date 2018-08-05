@@ -1,9 +1,15 @@
 # Hoast-filter
 Filter out files from further processing.
 
-> As the name suggest this is a [Hoast](https://github.com/hoast/hoast#readme) module.
+> As the name suggest this is a [hoast](https://github.com/hoast/hoast#readme) module.
 
 ## Usage
+
+Install using [npm](https://npmjs.com).
+
+```
+[$ npm install hoast-filter](https://www.npmjs.com/package/hoast-filter)
+```
 
 ### Parameters
 

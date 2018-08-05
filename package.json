@@ -25,7 +25,7 @@
     "url": "https://github.com/hoast/hoast-filter/issues"
   },
 	"peerDependencies": {
-		"hoast": "^0.0.0"
+		"hoast": "^0.0.1"
 	},
   "dependencies": {
     "nanomatch": "^1.2.13"
