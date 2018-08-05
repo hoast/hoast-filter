@@ -5,10 +5,10 @@ Filter out files from further processing.
 
 ## Usage
 
-Install using [npm](https://npmjs.com).
+Install [hoast-filter](https://npmjs.com/package/hoast-filter) using [npm](https://npmjs.com).
 
 ```
-[$ npm install hoast-filter](https://www.npmjs.com/package/hoast-filter)
+$ npm install hoast-filter
 ```
 
 ### Parameters
@@ -95,4 +95,5 @@ Hoast(__dirname)
 > In the example the layouts folder will be filter out from further processing.
 
 ## License
+
 [ISC license](https://github.com/hoast/hoast-filter/blob/master/LICENSE)
