@@ -12,7 +12,7 @@ const nanomatch = require('nanomatch');
 const validateOptions = function(options) {
 	assert(typeof(options) === 'object', 'hoast-filter: options must be set and of type object.');
 	if (options.invert) {
-		assert(typeof(invert) === 'boolean', 'hoast-filter: invert must be of type boolean.');
+		assert(typeof(options.invert) === 'boolean', 'hoast-filter: invert must be of type boolean.');
 	}
 	assert(typeof(options.patterns) === 'string' || (Array.isArray(options.patterns) && options.patterns.length > 0 && typeof(options.patterns[0] === 'string')), 'hoast-filter: patterns must be of type string or an array of string.');
 };
