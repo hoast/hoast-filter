@@ -1,7 +1,7 @@
 {
   "author": "Ron Dekker",
   "name": "hoast-filter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Hoast module used to filter out files from further processing.",
   "license": "ISC",
   "keywords": [
@@ -12,7 +12,7 @@
     "glob",
     "pattern"
   ],
-	"engines": {
+  "engines": {
     "node": ">=7.8.0"
   },
   "main": "index.js",
@@ -24,9 +24,9 @@
   "bugs": {
     "url": "https://github.com/hoast/hoast-filter/issues"
   },
-	"peerDependencies": {
-		"hoast": "^0.0.1"
-	},
+  "peerDependencies": {
+    "hoast": "^0.0.3"
+  },
   "dependencies": {
     "nanomatch": "^1.2.13"
   },
