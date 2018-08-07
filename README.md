@@ -1,4 +1,5 @@
-# Hoast-filter
+# hoast-filter
+
 Filter out files from further processing.
 
 > As the name suggest this is a [hoast](https://github.com/hoast/hoast#readme) module.
@@ -13,7 +14,7 @@ $ npm install hoast-filter
 
 ### Parameters
 
-* `patterns` **{Array of strings}**: An array of string which gets used to match files using glob patterns. See [nanomatch](https://github.com/micromatch/nanomatch#readme) for more details on the patterns.
+* `patterns` **{Array|strings}**: A string or an array of strings which gets used to match files using glob patterns. See [nanomatch](https://github.com/micromatch/nanomatch#readme) for more details on the patterns.
 	* Required: `yes`
 * `invert` **{boolean}**: When set to true instead of allowing matches it will discard them.
 	* Default: `false`

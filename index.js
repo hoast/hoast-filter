@@ -10,8 +10,11 @@ const nanomatch = require('nanomatch');
  * @param {Object} options The options.
  */
 const validateOptions = function(options) {
-	assert(typeof(options) === 'object', 'hoast.filter: options must be set and of type object.');
-	assert(Array.isArray(options.patterns) && options.patterns.length, 'hoast.filter: patterns must be set and an array of string.');
+	assert(typeof(options) === 'object', 'hoast-filter: options must be set and of type object.');
+	if (options.invert) {
+		assert(typeof(invert) === 'boolean', 'hoast-filter: invert must be of type boolean.');
+	}
+	assert(typeof(options.patterns) === 'string' || (Array.isArray(options.patterns) && options.patterns.length > 0 && typeof(options.patterns[0] === 'string')), 'hoast-filter: patterns must be of type string or an array of string.');
 };
 
 /**
