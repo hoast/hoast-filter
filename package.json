@@ -1,7 +1,7 @@
 {
   "author": "Ron Dekker",
   "name": "hoast-filter",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Hoast module used to filter out files from further processing.",
   "license": "ISC",
   "keywords": [
@@ -25,7 +25,7 @@
     "url": "https://github.com/hoast/hoast-filter/issues"
   },
   "peerDependencies": {
-    "hoast": "^0.0.3"
+    "hoast": "^0.0.6"
   },
   "dependencies": {
     "nanomatch": "^1.2.13"
