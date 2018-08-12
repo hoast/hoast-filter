@@ -29,9 +29,7 @@ All files that match the glob patterns will be further processed after the filte
 {
   "modules": {
     "hoast-filter": {
-      "patterns": [
-	    "**/*.md"
-      ]
+      "patterns": "**/*.md"
 	},
     "read": {}
   }
@@ -41,15 +39,13 @@ All files that match the glob patterns will be further processed after the filte
 **Script**
 
 ```javascript
-const Hoast = require('hoast');
+const Hoast = require(`hoast`);
 const read = Hoast.read,
-      filter = require('hoast-filter');
+      filter = require(`hoast-filter`);
 
 Hoast(__dirname)
   .use(filter({
-    patterns: [
-	  '**/*.md'
-    ]
+    patterns: `**/*.md`
   }))
   .use(read())
   .process();
@@ -66,9 +62,8 @@ The filter can also be inverted whereby it will filter out files matching the gl
   "modules": {
     "hoast-filter": {
       "invert": true,
-      "patterns": [
-	    "layouts/**"
-      ]
+      "patterns": "layouts/**"
+    }
 	},
     "read": {}
   }
@@ -78,16 +73,14 @@ The filter can also be inverted whereby it will filter out files matching the gl
 **Script**
 
 ```javascript
-const Hoast = require('hoast');
+const Hoast = require(`hoast`);
 const read = Hoast.read,
-      filter = require('hoast-filter');
+      filter = require(`hoast-filter`);
 
 Hoast(__dirname)
   .use(filter({
 	invert: true,
-    patterns: [
-	  'layouts/**'
-	]
+    patterns: `layouts/**`
   }))
   .use(read())
   .process();
