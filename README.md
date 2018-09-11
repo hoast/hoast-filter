@@ -20,10 +20,12 @@ $ npm install hoast-filter
 
 ### Parameters
 
-* `patterns` **{Array|strings}**: A string or an array of strings which gets used to match files using glob patterns. See [nanomatch](https://github.com/micromatch/nanomatch#readme) for more details on the patterns.
-	* Required: `yes`
-* `invert` **{boolean}**: When set to true instead of allowing matches it will discard them.
+* `engine` **{Function}**: Optionally a custom function can be specified to use for filtering instead of the default pattern matching. The function gets given one argument [the file data](https://github.com/hoast/hoast#modules) and requires one return value of type Boolean.
+	* Required: `If pattern not specified`
+* `invert` **{boolean}**: When set to true instead of allowing matches it will discard them. If the engine function is used it will invert the pattern allowance as well.
 	* Default: `false`
+* `patterns` **{Array|strings}**: A string or an array of strings which gets used to match files using glob patterns. See [nanomatch](https://github.com/micromatch/nanomatch#readme) for more details on the patterns. If the engine function is set it will only give the function any files matching the pattern.
+	* Required: `If engine not specified`
 
 ### Examples
 
@@ -85,14 +87,41 @@ const read = Hoast.read,
 
 Hoast(__dirname)
   .use(filter({
-	invert: true,
+	  invert: true,
     patterns: `layouts/**`
   }))
   .use(read())
   .process();
 ```
 
-> In the example the layouts folder will be filter out from further processing.
+> In the example the layouts directory will be filter out from further processing.
+
+The engine function can also be used to specify a custom filter based on the file's data.
+
+**CLI**
+
+Not compatible with the CLI tool as it requires a reference to a self specified function.
+
+**Script**
+
+```javascript
+const path = require(`path`);
+const Hoast = require(`hoast`);
+const read = Hoast.read,
+      filter = require(`hoast-filter`);
+
+Hoast(__dirname)
+  .use(filter({
+    engine: function(file) {
+      return path.extname(file.path) === `.hbs`;
+    },
+    patterns: `layouts/**`
+  }))
+  .use(read())
+  .process();
+```
+
+> In the example any files within the layouts directory will be filtered out if they do not have the `.hbs` extension. All other files outside the layouts directory will remain part of the files array and be processed further.
 
 ## License
 
