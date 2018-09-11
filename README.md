@@ -24,7 +24,7 @@ $ npm install hoast-filter
 	* Required: `If pattern not specified`
 * `invert` **{boolean}**: When set to true instead of allowing matches it will discard them. If the engine function is used it will invert the pattern allowance as well.
 	* Default: `false`
-* `patterns` **{Array|strings}**: A string or an array of strings which gets used to match files using glob patterns. See [nanomatch](https://github.com/micromatch/nanomatch#readme) for more details on the patterns. If the engine function is set it will only give the function any files matching the pattern.
+* `patterns` **{Array|string}**: A string or an array of strings which gets used to match files using glob patterns. See [nanomatch](https://github.com/micromatch/nanomatch#readme) for more details on the patterns. If the engine function is set it will only give the function any files matching the pattern.
 	* Required: `If engine not specified`
 
 ### Examples

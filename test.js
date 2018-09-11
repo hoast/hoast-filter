@@ -1,4 +1,4 @@
-// Dependecy modules.
+// Dependency modules.
 const test = require(`ava`);
 // Custom module.
 const Filter = require(`.`);
