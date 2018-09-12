@@ -36,31 +36,35 @@ module.exports = function(options) {
 		invert: false,
 	}, options);
 	
-	return function(hoast, files) {
+	return async function(hoast, files) {
 		debug(`Running module.`);
-		
-		// Object to write filtered files to.
-		let filtered;
 		
 		if (options.engine) {
 			debug(`Using engine filter method.`);
 			
-			filtered = files.filter(function(file) {
+			Promise.all(files.map(function(file) {
 				// First check nanomatch filter whether it should be filtered.
+				if (options.patterns && nanomatch.any(file.path, options.patterns) === options.invert)  {
+					return true;
+				}
 				// Else use the specified engine function.
-				return (options.patterns && nanomatch.any(file.path, options.patterns) === options.invert) ? true : options.engine(file);
+				return options.engine(file);
+			})).then(function(result) {
+				files = files.filter(function(file, index) {
+					return result[index];
+				});
 			});
 		} else {
 			debug(`Using standard filter method.`);
 			
 			// Filter using nanomatch based of patterns.
-			filtered = files.filter(function(file) {
+			files = files.filter(function(file) {
 				debug(`Filtering file '${file.path}'.`);
 				return nanomatch.any(file.path, options.patterns) ? !options.invert : options.invert;
 			});
 		}
 		debug(`Finished filtering files.`);
 		
-		return filtered;
+		return files;
 	};
 };

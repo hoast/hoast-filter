@@ -20,7 +20,7 @@ $ npm install hoast-filter
 
 ### Parameters
 
-* `engine` **{Function}**: Optionally a custom function can be specified to use for filtering instead of the default pattern matching. The function gets given one argument [the file data](https://github.com/hoast/hoast#modules) and requires one return value of type Boolean.
+* `engine` **{Function}**: Optionally a custom function can be specified to use for filtering instead of the default pattern matching. The function can be asynchronous and gets given one argument [the file data](https://github.com/hoast/hoast#modules) and requires one return value of type Boolean.
 	* Required: `If pattern not specified`
 * `invert` **{boolean}**: When set to true instead of allowing matches it will discard them. If the engine function is used it will invert the pattern allowance as well.
 	* Default: `false`
