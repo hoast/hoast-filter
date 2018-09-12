@@ -1,7 +1,7 @@
 {
   "author": "Ron Dekker",
   "name": "hoast-filter",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Hoast module used to filter out files from further processing.",
   "license": "ISC",
   "keywords": [

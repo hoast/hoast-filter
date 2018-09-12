@@ -39,18 +39,19 @@ module.exports = function(options) {
 	return async function(hoast, files) {
 		debug(`Running module.`);
 		
+		let filtered;
 		if (options.engine) {
 			debug(`Using engine filter method.`);
 			
-			Promise.all(files.map(function(file) {
+			await Promise.all(files.map(async function(file) {
 				// First check nanomatch filter whether it should be filtered.
 				if (options.patterns && nanomatch.any(file.path, options.patterns) === options.invert)  {
 					return true;
 				}
 				// Else use the specified engine function.
-				return options.engine(file);
+				return await options.engine(file);
 			})).then(function(result) {
-				files = files.filter(function(file, index) {
+				filtered = files.filter(function(file, index) {
 					return result[index];
 				});
 			});
@@ -58,13 +59,13 @@ module.exports = function(options) {
 			debug(`Using standard filter method.`);
 			
 			// Filter using nanomatch based of patterns.
-			files = files.filter(function(file) {
+			filtered = files.filter(function(file) {
 				debug(`Filtering file '${file.path}'.`);
 				return nanomatch.any(file.path, options.patterns) ? !options.invert : options.invert;
 			});
 		}
 		debug(`Finished filtering files.`);
 		
-		return files;
+		return filtered;
 	};
 };

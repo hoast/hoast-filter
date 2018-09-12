@@ -4,7 +4,7 @@ const test = require(`ava`);
 const Filter = require(`.`);
 
 // Test patterns option with a string.
-test(`pattern`, function(t) {
+test(`pattern`, async function(t) {
 	// Create dummy files.
 	let files = [{
 		path: `a.txt`
@@ -18,7 +18,7 @@ test(`pattern`, function(t) {
 	}];
 	
 	// Test module.
-	files = Filter({
+	files = await Filter({
 		patterns: `**/*.txt`
 	})({}, files);
 	
@@ -27,7 +27,7 @@ test(`pattern`, function(t) {
 });
 
 // Test patterns option with an array.
-test(`patterns`, function(t) {
+test(`patterns`, async function(t) {
 	// Create dummy files.
 	let files = [{
 		path: `a.txt`
@@ -45,7 +45,7 @@ test(`patterns`, function(t) {
 	}];
 	
 	// Test module.
-	files = Filter({
+	files = await Filter({
 		patterns: [
 			`**/*.txt`,
 			`**/*.md`
@@ -57,7 +57,7 @@ test(`patterns`, function(t) {
 });
 
 // Test invert option.
-test(`invert`, function(t) {
+test(`invert`, async function(t) {
 	// Create dummy files.
 	let files = [{
 		path: `a.txt`
@@ -73,7 +73,7 @@ test(`invert`, function(t) {
 	}];
 	
 	// Test module.
-	files = Filter({
+	files = await Filter({
 		invert: true,
 		patterns: [
 			`**/*.txt`,
@@ -86,7 +86,7 @@ test(`invert`, function(t) {
 });
 
 // Test engine option.
-test(`engine`, function(t) {
+test(`engine`, async function(t) {
 	// Create dummy files.
 	let files = [{
 		path: `a.txt`
@@ -102,7 +102,7 @@ test(`engine`, function(t) {
 	}];
 	
 	// Test module.
-	files = Filter({
+	files = await Filter({
 		engine: function(file) {
 			return file.path === `a.txt`;
 		}
@@ -113,7 +113,7 @@ test(`engine`, function(t) {
 });
 
 // Test engine option in combination with a pattern.
-test(`engine-pattern`, function(t) {
+test(`engine-pattern`, async function(t) {
 	// Create dummy files.
 	let files = [{
 		path: `a.txt`
@@ -131,7 +131,7 @@ test(`engine-pattern`, function(t) {
 	}];
 	
 	// Test module.
-	files = Filter({
+	files = await Filter({
 		engine: function(file) {
 			return file.path === `a.txt`;
 		},
@@ -143,7 +143,7 @@ test(`engine-pattern`, function(t) {
 });
 
 // Test engine option in combination with an inverted pattern.
-test(`engine-invert`, function(t) {
+test(`engine-invert`, async function(t) {
 	// Create dummy files.
 	let files = [{
 		path: `a.txt`
@@ -161,7 +161,7 @@ test(`engine-invert`, function(t) {
 	}];
 	
 	// Test module.
-	files = Filter({
+	files = await Filter({
 		engine: function(file) {
 			return file.path === `b.md`;
 		},
