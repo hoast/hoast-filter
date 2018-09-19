@@ -174,7 +174,6 @@ test(`engine-pattern`, async function(t) {
 	// Test module.
 	const filter = Filter({
 		engine: function(file) {
-			console.log(`pattern`, file);
 			return file.path === `a.css`;
 		},
 		patterns: `*.html`
