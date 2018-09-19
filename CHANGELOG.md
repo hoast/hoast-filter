@@ -1,22 +1,28 @@
 # Changelog
 
-## 0.2.2 (2018-09-12)
-For hoast version 0.1.0.
+## 1.0.0-beta.0 (2018-09-19)
+For hoast `v1.0.0-beta.0`.
+### Changed
+- Restructured project files.
+- Switched from using `nanomatch` to [`planckmatch`](https://github.com/redkenrok/node-planckmatch#readme) for filtering file paths.
 
+> Do note option properties have changed, and are not backwards compatible.
+
+## 0.2.2 (2018-09-12)
+For hoast `v0.1.0`.
 ## Fixed
 - `engine` parameter had critical error in asynchronous operation.
 
 ## 0.2.1 (2018-09-12)
-For hoast version 0.1.0.
-
+For hoast `v0.1.0`.
 ## Changed
 - `engine` parameter now also accepts asynchronous functions.
 
 ## 0.2.0 (2018-09-11)
-For hoast version 0.1.0.
-
+For hoast `v0.1.0`.
 ### Added
+- `CHANGELOG.md` added.
 - `engine` parameter added to the module options, which allows for a custom filter method.
 
 ## 0.1.0 (2018-08-21)
-Initial release, for hoast version 0.1.0.
+Initial release, for hoast version `v0.1.0`.

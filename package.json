@@ -1,14 +1,17 @@
 {
-  "author": "Ron Dekker",
+  "author": {
+    "name": "Ron Dekker",
+    "url": "https://rondekker.nl"
+  },
   "name": "hoast-filter",
-  "version": "0.2.2",
+  "version": "1.0.0-beta.0",
   "description": "Hoast module used to filter out files from further processing.",
   "license": "ISC",
   "keywords": [
     "hoast",
     "filter",
-    "nanomatch",
     "match",
+    "extended",
     "glob",
     "pattern"
   ],
@@ -23,13 +26,16 @@
   "engines": {
     "node": ">=7.8.0"
   },
-  "main": "index.js",
+  "main": "library/index.js",
+  "files": [
+    "library/"
+  ],
   "scripts": {
-    "pretest": "eslint index.js test.js",
-    "test": "ava test.js --verbose"
+    "pretest": "eslint library/**/*.js test/**/*.js",
+    "test": "ava test/**/*.js --verbose"
   },
   "dependencies": {
-    "nanomatch": "^1.2.13"
+    "planckmatch": "^0.0.3"
   },
   "devDependencies": {
     "ava": "^0.25.0",

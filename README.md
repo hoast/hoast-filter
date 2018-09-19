@@ -1,7 +1,8 @@
-[![Version master branch](https://img.shields.io/github/package-json/v/hoast/hoast-filter.svg?label=master&style=flat-square)](https://github.com/hoast/hoast-filter#readme)
 [![Version npm package](https://img.shields.io/npm/v/hoast-filter.svg?label=npm&style=flat-square)](https://npmjs.com/package/hoast-filter)
+[![Version GitHub master branch](https://img.shields.io/github/package-json/v/hoast/hoast-filter.svg?label=github&style=flat-square)](https://github.com/hoast/hoast-filter#readme)
+[![Version GitHub develop branch](https://img.shields.io/github/package-json/v/hoast/hoast-filter/develop.svg?label=github/develop&style=flat-square)](https://github.com/hoast/hoast-filter/tree/develop#readme)
 [![License agreement](https://img.shields.io/github/license/hoast/hoast-filter.svg?style=flat-square)](https://github.com/hoast/hoast-filter/blob/master/LICENSE)
-[![Travis-ci build status](https://img.shields.io/travis-ci/hoast/hoast-filter.svg?branch=master&style=flat-square)](https://travis-ci.org/hoast/hoast-filter)
+[![Travis-ci build status](https://img.shields.io/travis-ci/hoast/hoast-filter.svg?label=travis&branch=master&style=flat-square)](https://travis-ci.org/hoast/hoast-filter)
 [![Open issues on GitHub](https://img.shields.io/github/issues/hoast/hoast-filter.svg?style=flat-square)](https://github.com/hoast/hoast-filter/issues)
 
 # hoast-filter
@@ -20,12 +21,20 @@ $ npm install hoast-filter
 
 ### Parameters
 
-* `engine` **{Function}**: Optionally a custom function can be specified to use for filtering instead of the default pattern matching. The function can be asynchronous and gets given one argument [the file data](https://github.com/hoast/hoast#modules) and requires one return value of type Boolean.
+The parameters are given via a single object with the properties listed below.
+
+* `engine`: A custom function can be specified to use for filtering with instead of the default pattern matching. The function can be asynchronous and gets given one argument [the file data](https://github.com/hoast/hoast#modules) and requires one return value of type Boolean.
+  * Type: `Function`
 	* Required: `If pattern not specified`
-* `invert` **{boolean}**: When set to true instead of allowing matches it will discard them. If the engine function is used it will invert the pattern allowance as well.
-	* Default: `false`
-* `patterns` **{Array|string}**: A string or an array of strings which gets used to match files using glob patterns. See [nanomatch](https://github.com/micromatch/nanomatch#readme) for more details on the patterns. If the engine function is set it will only give the function any files matching the pattern.
+* `patterns`: Glob patterns to match file paths with. If the engine function is set it will only give the function any files matching the pattern.
+  * Type: `String` or `Array of strings`
 	* Required: `If engine not specified`
+* `patternOptions`: Options for the glob pattern matching. See [planckmatch options](https://github.com/redkenrok/node-planckmatch#options) for more details on the pattern options.
+  * Type: `Object`
+  * Default: `{}`
+* `patternOptions.all`: This options is added to `patternOptions`, and determines whether all patterns need to match instead of only one.
+  * Type: `Boolean`
+  * Default: `false`
 
 ### Examples
 
@@ -37,8 +46,11 @@ All files that match the glob patterns will be further processed after the filte
 {
   "modules": {
     "hoast-filter": {
-      "patterns": "**/*.md"
-	},
+      "patterns": "**/*.md",
+      "patternOptions": {
+        "globstar": true
+      }
+	  },
     "read": {}
   }
 }
@@ -53,7 +65,10 @@ const read = Hoast.read,
 
 Hoast(__dirname)
   .use(filter({
-    patterns: `**/*.md`
+    patterns: `**/*.md`,
+    patternOptions: {
+      globstar: true
+    }
   }))
   .use(read())
   .process();
@@ -69,8 +84,15 @@ The filter can also be inverted whereby it will filter out files matching the gl
 {
   "modules": {
     "hoast-filter": {
-      "invert": true,
-      "patterns": "layouts/**"
+      "patterns": [
+        "*"
+        "!(layouts/**)"
+      ],
+      "patternOptions": {
+        "all": true,
+        "extended": true,
+        "globstar": true
+      }
     }
 	},
     "read": {}
@@ -87,8 +109,15 @@ const read = Hoast.read,
 
 Hoast(__dirname)
   .use(filter({
-	  invert: true,
-    patterns: `layouts/**`
+    patterns: [
+      `*`
+      `!(layouts/**)`
+    ],
+    patternOptions: {
+      all: true,
+      extended: true,
+      globstar: true
+    }
   }))
   .use(read())
   .process();
@@ -100,7 +129,7 @@ The engine function can also be used to specify a custom filter based on the fil
 
 **CLI**
 
-Not compatible with the CLI tool as it requires a reference to a self specified function.
+`engine` option is not compatible with the CLI tool as it requires a reference to a self specified function.
 
 **Script**
 
@@ -115,7 +144,15 @@ Hoast(__dirname)
     engine: function(file) {
       return path.extname(file.path) === `.hbs`;
     },
-    patterns: `layouts/**`
+    patterns: [
+      `*`
+      `!(layouts/**)`
+    ],
+    patternOptions: {
+      all: true,
+      extended: true,
+      globstar: true
+    }
   }))
   .use(read())
   .process();
