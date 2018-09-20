@@ -159,23 +159,25 @@ test(`engine-pattern`, async function(t) {
 	let files = [{
 		path: `a.css`
 	}, {
-		path: `b.css`
+		path: `b.html`
 	}, {
-		path: `c.html`
+		path: `c.js`
 	}];
 	
 	// Expected outcome.
 	let filesOutcome = [{
 		path: `a.css`
+	}, {
+		path: `b.html`
 	}];
 	
 	// Test module.
 	const filter = Filter({
 		engine: function(file) {
-			t.true([ `a.css`, `b.css` ].indexOf(file.path) >= 0);
+			t.true([ `a.css`, `c.js` ].indexOf(file.path) >= 0);
 			return file.path === `a.css`;
 		},
-		patterns: `*.css`
+		patterns: `*.html`
 	});
 	filter.before();
 	files = await filter({}, files);
@@ -193,22 +195,28 @@ test(`engine-patterns`, async function(t) {
 		path: `b.html`
 	}, {
 		path: `c.js`
+	}, {
+		path: `d.md`
 	}];
 	
 	// Expected outcome.
 	let filesOutcome = [{
 		path: `a.css`
+	}, {
+		path: `b.html`
+	}, {
+		path: `c.js`
 	}];
 	
 	// Test module.
 	const filter = Filter({
 		engine: function(file) {
-			t.true([ `a.css`, `b.html` ].indexOf(file.path) >= 0);
+			t.true([ `a.css`, `d.md` ].indexOf(file.path) >= 0);
 			return file.path === `a.css`;
 		},
 		patterns: [
-			`*.css`,
-			`*.html`
+			`*.html`,
+			`*.js`
 		]
 	});
 	filter.before();
@@ -225,20 +233,24 @@ test(`engine-options`, async function(t) {
 		path: `a.css`
 	}, {
 		path: `b.html`
+	}, {
+		path: `c.js`
 	}];
 	
 	// Expected outcome.
 	let filesOutcome = [{
 		path: `a.css`
+	}, {
+		path: `b.html`
 	}];
 	
 	// Test module.
 	const filter = Filter({
 		engine: function(file) {
-			t.true([ `a.css` ].indexOf(file.path) >= 0);
+			t.true([ `a.css`, `c.js` ].indexOf(file.path) >= 0);
 			return file.path === `a.css`;
 		},
-		patterns: `**/*.css`,
+		patterns: `**/*.html`,
 		patternOptions: {
 			globstar: true
 		}
@@ -258,23 +270,25 @@ test(`engine-all`, async function(t) {
 	}, {
 		path: `b.html`
 	}, {
-		path: `c.js`
+		path: `c.html`
 	}];
 	
 	// Expected outcome.
 	let filesOutcome = [{
 		path: `a.css`
+	}, {
+		path: `b.html`
 	}];
 	
 	// Test module.
 	const filter = Filter({
 		engine: function(file) {
-			t.true([ `a.css`, `b.html` ].indexOf(file.path) >= 0);
+			t.true([ `a.css`, `c.html` ].indexOf(file.path) >= 0);
 			return file.path === `a.css`;
 		},
 		patterns: [
-			`**`,
-			`!(*.js)`
+			`b.*`,
+			`*.html`
 		],
 		patternOptions: {
 			all: true,

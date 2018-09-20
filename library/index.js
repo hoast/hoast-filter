@@ -91,9 +91,9 @@ module.exports = function(options) {
 			await Promise.all(files.map(async function(file) {
 				debug(`Filtering file '${file.path}'.`);
 				// First check if expression are given then with the expressions check whether it should be filtered.
-				if (this.expressions && !isMatch(file.path, this.expressions, options.patternOptions.all)) {
+				if (this.expressions && isMatch(file.path, this.expressions, options.patternOptions.all)) {
 					debug(`File path valid for skipping.`);
-					return false;
+					return true;
 				}
 				
 				debug(`Custom function for file '${file.path}'.`);

@@ -31,10 +31,10 @@ The parameters are given via a single object with the properties listed below.
 
 * `engine`: A custom function can be specified to use for filtering with instead of the default pattern matching. The function can be asynchronous and gets given one argument [the file data](https://github.com/hoast/hoast#modules) and requires one return value of type Boolean.
   * Type: `Function`
-	* Required: `If pattern not specified`
-* `patterns`: Glob patterns to match file paths with. If the engine function is set the file paths need match to the patterns for it to be passed onto the engine function.
+  * Required: `If pattern not specified`
+* `patterns`: Glob patterns to match file paths with. If the engine function is set the file paths matches to the patterns it will be skipped and continue to be processed.
   * Type: `String` or `Array of strings`
-	* Required: `If engine not specified`
+  * Required: `If engine not specified`
 * `patternOptions`: Options for the glob pattern matching. See [planckmatch options](https://github.com/redkenrok/node-planckmatch#options) for more details on the pattern options.
   * Type: `Object`
   * Default: `{}`

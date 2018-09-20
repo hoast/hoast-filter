@@ -4,7 +4,7 @@
     "url": "https://rondekker.nl"
   },
   "name": "hoast-filter",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "Hoast module used to filter out files from further processing.",
   "license": "ISC",
   "keywords": [
