@@ -159,24 +159,23 @@ test(`engine-pattern`, async function(t) {
 	let files = [{
 		path: `a.css`
 	}, {
-		path: `b.html`
+		path: `b.css`
 	}, {
-		path: `c.js`
+		path: `c.html`
 	}];
 	
 	// Expected outcome.
 	let filesOutcome = [{
 		path: `a.css`
-	}, {
-		path: `b.html`
 	}];
 	
 	// Test module.
 	const filter = Filter({
 		engine: function(file) {
+			t.true([ `a.css`, `b.css` ].indexOf(file.path) >= 0);
 			return file.path === `a.css`;
 		},
-		patterns: `*.html`
+		patterns: `*.css`
 	});
 	filter.before();
 	files = await filter({}, files);
@@ -199,20 +198,17 @@ test(`engine-patterns`, async function(t) {
 	// Expected outcome.
 	let filesOutcome = [{
 		path: `a.css`
-	}, {
-		path: `b.html`
-	}, {
-		path: `c.js`
 	}];
 	
 	// Test module.
 	const filter = Filter({
 		engine: function(file) {
+			t.true([ `a.css`, `b.html` ].indexOf(file.path) >= 0);
 			return file.path === `a.css`;
 		},
 		patterns: [
-			`*.html`,
-			`*.js`
+			`*.css`,
+			`*.html`
 		]
 	});
 	filter.before();
@@ -234,16 +230,15 @@ test(`engine-options`, async function(t) {
 	// Expected outcome.
 	let filesOutcome = [{
 		path: `a.css`
-	}, {
-		path: `b.html`
 	}];
 	
 	// Test module.
 	const filter = Filter({
 		engine: function(file) {
+			t.true([ `a.css` ].indexOf(file.path) >= 0);
 			return file.path === `a.css`;
 		},
-		patterns: `**/*.html`,
+		patterns: `**/*.css`,
 		patternOptions: {
 			globstar: true
 		}
@@ -269,19 +264,22 @@ test(`engine-all`, async function(t) {
 	// Expected outcome.
 	let filesOutcome = [{
 		path: `a.css`
-	}, {
-		path: `b.html`
 	}];
 	
 	// Test module.
 	const filter = Filter({
 		engine: function(file) {
+			t.true([ `a.css`, `b.html` ].indexOf(file.path) >= 0);
 			return file.path === `a.css`;
 		},
-		patterns: `*.html`,
+		patterns: [
+			`**`,
+			`!(*.js)`
+		],
 		patternOptions: {
 			all: true,
-			extended: true
+			extended: true,
+			globstar: true
 		}
 	});
 	filter.before();

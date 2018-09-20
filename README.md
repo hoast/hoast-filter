@@ -1,10 +1,15 @@
-[![Version npm package](https://img.shields.io/npm/v/hoast-filter.svg?label=npm&style=flat-square)](https://npmjs.com/package/hoast-filter)
-[![Version npm package @next](https://img.shields.io/npm/v/hoast-filter/next.svg?label=npm/next&style=flat-square)](https://npmjs.com/package/hoast-filter/v/next)
-[![Version GitHub master branch](https://img.shields.io/github/package-json/v/hoast/hoast-filter.svg?label=github&style=flat-square)](https://github.com/hoast/hoast-filter#readme)
-[![Version GitHub develop branch](https://img.shields.io/github/package-json/v/hoast/hoast-filter/develop.svg?label=github/develop&style=flat-square)](https://github.com/hoast/hoast-filter/tree/develop#readme)
-[![License agreement](https://img.shields.io/github/license/hoast/hoast-filter.svg?style=flat-square)](https://github.com/hoast/hoast-filter/blob/master/LICENSE)
-[![Travis-ci build status](https://img.shields.io/travis-ci/hoast/hoast-filter.svg?label=travis&branch=master&style=flat-square)](https://travis-ci.org/hoast/hoast-filter)
-[![Open issues on GitHub](https://img.shields.io/github/issues/hoast/hoast-filter.svg?style=flat-square)](https://github.com/hoast/hoast-filter/issues)
+<div align="center">
+  
+  [![npm package @latest](https://img.shields.io/npm/v/hoast-filter.svg?label=npm@latest&style=flat-square&maxAge=3600)](https://npmjs.com/package/hoast-filter)
+  [![npm package @next](https://img.shields.io/npm/v/hoast-filter/next.svg?label=npm@next&style=flat-square&maxAge=3600)](https://npmjs.com/package/hoast-filter/v/next)
+  
+  [![Travis-ci master branch](https://img.shields.io/travis-ci/hoast/hoast-filter.svg?label=travis/master&branch=master&style=flat-square&maxAge=3600)](https://travis-ci.org/hoast/hoast-filter)
+  [![Travis-ci develop branch](https://img.shields.io/travis-ci/hoast/hoast-filter.svg?label=travis/develop&branch=develop&style=flat-square&maxAge=3600)](https://travis-ci.org/hoast/hoast-filter)
+  
+  [![License agreement](https://img.shields.io/github/license/hoast/hoast-filter.svg?style=flat-square&maxAge=86400)](https://github.com/hoast/hoast-filter/blob/master/LICENSE)
+  [![Open issues on GitHub](https://img.shields.io/github/issues/hoast/hoast-filter.svg?style=flat-square&maxAge=86400)](https://github.com/hoast/hoast-filter/issues)
+  
+</div>
 
 # hoast-filter
 
@@ -27,7 +32,7 @@ The parameters are given via a single object with the properties listed below.
 * `engine`: A custom function can be specified to use for filtering with instead of the default pattern matching. The function can be asynchronous and gets given one argument [the file data](https://github.com/hoast/hoast#modules) and requires one return value of type Boolean.
   * Type: `Function`
 	* Required: `If pattern not specified`
-* `patterns`: Glob patterns to match file paths with. If the engine function is set it will only give the function any files matching the pattern.
+* `patterns`: Glob patterns to match file paths with. If the engine function is set the file paths need match to the patterns for it to be passed onto the engine function.
   * Type: `String` or `Array of strings`
 	* Required: `If engine not specified`
 * `patternOptions`: Options for the glob pattern matching. See [planckmatch options](https://github.com/redkenrok/node-planckmatch#options) for more details on the pattern options.
