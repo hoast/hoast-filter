@@ -3,8 +3,8 @@
   [![npm package @latest](https://img.shields.io/npm/v/hoast-filter.svg?label=npm@latest&style=flat-square&maxAge=3600)](https://npmjs.com/package/hoast-filter)
   [![npm package @next](https://img.shields.io/npm/v/hoast-filter/next.svg?label=npm@next&style=flat-square&maxAge=3600)](https://npmjs.com/package/hoast-filter/v/next)
   
-  [![Travis-ci master branch](https://img.shields.io/travis-ci/hoast/hoast-filter.svg?label=travis/master&branch=master&style=flat-square&maxAge=3600)](https://travis-ci.org/hoast/hoast-filter)
-  [![Travis-ci develop branch](https://img.shields.io/travis-ci/hoast/hoast-filter.svg?label=travis/develop&branch=develop&style=flat-square&maxAge=3600)](https://travis-ci.org/hoast/hoast-filter)
+  [![Travis-ci status](https://img.shields.io/travis-ci/hoast/hoast-filter.svg?branch=master&label=test%20status&style=flat-square&maxAge=3600)](https://travis-ci.org/hoast/hoast-filter)
+  [![CodeCov coverage](https://img.shields.io/codecov/c/github/hoast/hoast-filter/master.svg?label=test%20coverage&style=flat-square&maxAge=3600)](https://codecov.io/gh/hoast/hoast-filter)
   
   [![License agreement](https://img.shields.io/github/license/hoast/hoast-filter.svg?style=flat-square&maxAge=86400)](https://github.com/hoast/hoast-filter/blob/master/LICENSE)
   [![Open issues on GitHub](https://img.shields.io/github/issues/hoast/hoast-filter.svg?style=flat-square&maxAge=86400)](https://github.com/hoast/hoast-filter/issues)
@@ -56,7 +56,7 @@ All files that match the glob patterns will be further processed after the filte
       "patternOptions": {
         "globstar": true
       }
-	  },
+    },
     "read": {}
   }
 }
@@ -99,8 +99,7 @@ The filter can also be inverted whereby it will filter out files matching the gl
         "extended": true,
         "globstar": true
       }
-    }
-	},
+    },
     "read": {}
   }
 }

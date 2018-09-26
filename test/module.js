@@ -76,9 +76,9 @@ test(`options`, async function(t) {
 	
 	// Test module.
 	const filter = Filter({
-		patterns: `**/*.css`,
+		patterns: `?.css`,
 		patternOptions: {
-			globstar: true
+			extended: true
 		}
 	});
 	filter.before();
@@ -89,7 +89,7 @@ test(`options`, async function(t) {
 });
 
 // Test invert option.
-test(`all`, async function(t) {
+test(`patternOptions:all`, async function(t) {
 	// Create dummy files.
 	let files = [{
 		path: `a.css`
@@ -250,9 +250,9 @@ test(`engine-options`, async function(t) {
 			t.true([ `a.css`, `c.js` ].indexOf(file.path) >= 0);
 			return file.path === `a.css`;
 		},
-		patterns: `**/*.html`,
+		patterns: `?.html`,
 		patternOptions: {
-			globstar: true
+			extended: true
 		}
 	});
 	filter.before();
@@ -263,7 +263,7 @@ test(`engine-options`, async function(t) {
 });
 
 // Test engine option in combination with an inverted pattern.
-test(`engine-all`, async function(t) {
+test(`engine-patternOptions:all`, async function(t) {
 	// Create dummy files.
 	let files = [{
 		path: `a.css`
@@ -292,8 +292,7 @@ test(`engine-all`, async function(t) {
 		],
 		patternOptions: {
 			all: true,
-			extended: true,
-			globstar: true
+			extended: true
 		}
 	});
 	filter.before();
