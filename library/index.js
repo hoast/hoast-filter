@@ -124,7 +124,7 @@ module.exports = function(options) {
 		
 		// Parse glob patterns into regular expressions.
 		if (options.patterns) {
-			this.expressions = parse(options.patterns, options.patternOptions);
+			this.expressions = parse(options.patterns, options.patternOptions, true);
 			debug(`Patterns parsed into expressions: ${this.expressions}.`);
 		}
 	};
