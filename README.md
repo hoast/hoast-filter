@@ -52,10 +52,7 @@ All files that match the glob patterns will be further processed after the filte
 {
   "modules": {
     "hoast-filter": {
-      "patterns": "**/*.md",
-      "patternOptions": {
-        "globstar": true
-      }
+      "patterns": "*.md"
     },
     "read": {}
   }
@@ -71,10 +68,7 @@ const read = Hoast.read,
 
 Hoast(__dirname)
   .use(filter({
-    patterns: `**/*.md`,
-    patternOptions: {
-      globstar: true
-    }
+    patterns: `*.md`
   }))
   .use(read())
   .process();
@@ -92,12 +86,11 @@ The filter can also be inverted whereby it will filter out files matching the gl
     "hoast-filter": {
       "patterns": [
         "*"
-        "!(layouts/**)"
+        "!(layouts/*)"
       ],
       "patternOptions": {
         "all": true,
-        "extended": true,
-        "globstar": true
+        "extended": true
       }
     },
     "read": {}
@@ -116,12 +109,11 @@ Hoast(__dirname)
   .use(filter({
     patterns: [
       `*`
-      `!(layouts/**)`
+      `!(layouts/*)`
     ],
     patternOptions: {
       all: true,
-      extended: true,
-      globstar: true
+      extended: true
     }
   }))
   .use(read())
@@ -151,12 +143,11 @@ Hoast(__dirname)
     },
     patterns: [
       `*`
-      `!(layouts/**)`
+      `!(layouts/*)`
     ],
     patternOptions: {
       all: true,
-      extended: true,
-      globstar: true
+      extended: true
     }
   }))
   .use(read())
