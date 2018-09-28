@@ -4,7 +4,7 @@
     "url": "https://rondekker.nl"
   },
   "name": "hoast-filter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Hoast module used to filter out files from further processing.",
   "license": "ISC",
   "keywords": [
@@ -36,7 +36,7 @@
     "test": "nyc --reporter=text ava test/**.js --verbose"
   },
   "dependencies": {
-    "planckmatch": "^0.1.0"
+    "planckmatch": "^0.1.1"
   },
   "devDependencies": {
     "ava": "^0.25.0",

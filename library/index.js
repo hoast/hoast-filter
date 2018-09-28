@@ -55,17 +55,14 @@ const validateOptions = function(options) {
 const isMatch = function(value, expressions, all) {
 	const result = match(value, expressions);
 	
-	// If results is a boolean check if it is true.
-	if (typeof(result) === `boolean` && result) {
-		return true;
-	}
-	// If results is an array check whether everything needs to be true or any will be enough.
-	if (Array.isArray(result) && (all ? !result.includes(false) : result.includes(true))) {
-		return true;
+	// If results is an array.
+	if (Array.isArray(result)) {
+		// Check whether all or just any will result in a match, and return the outcome.
+		return all ? !result.includes(false) : result.includes(true);
 	}
 	
-	// Otherwise it is no match.
-	return false;
+	// Otherwise result is a boolean and can be returned directly.
+	return result;
 };
 
 /**
@@ -81,13 +78,16 @@ module.exports = function(options) {
 		patternOptions: {}
 	}, options);
 	
+	// Main module method.
 	const mod = async function(hoast, files) {
 		debug(`Running module.`);
 		
 		let filtered;
+		// Check if custom function is specified.
 		if (options.engine) {
 			debug(`Using engine filter method.`);
 			
+			// Loop through the files.
 			await Promise.all(files.map(async function(file) {
 				debug(`Filtering file '${file.path}'.`);
 				// First check if expression are given then with the expressions check whether it should be filtered.
