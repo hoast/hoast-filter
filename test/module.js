@@ -21,7 +21,6 @@ test(`pattern`, async function(t) {
 	const filter = Filter({
 		patterns: `*.css`
 	});
-	filter.before();
 	files = await filter({}, files);
 	
 	// Compare files.
@@ -53,7 +52,6 @@ test(`patterns`, async function(t) {
 			`*.html`
 		]
 	});
-	filter.before();
 	files = await filter({}, files);
 	
 	// Compare files.
@@ -81,7 +79,6 @@ test(`options`, async function(t) {
 			extended: true
 		}
 	});
-	filter.before();
 	files = await filter({}, files);
 	
 	// Compare files.
@@ -117,7 +114,6 @@ test(`patternOptions:all`, async function(t) {
 			extended: true
 		}
 	});
-	filter.before();
 	files = await filter({}, files);
 	
 	// Compare files.
@@ -146,7 +142,6 @@ test(`engine`, async function(t) {
 			return file.path === `a.css`;
 		}
 	});
-	filter.before();
 	files = await filter({}, files);
 	
 	// Compare files.
@@ -179,7 +174,6 @@ test(`engine-pattern`, async function(t) {
 		},
 		patterns: `*.html`
 	});
-	filter.before();
 	files = await filter({}, files);
 	
 	// Compare files.
@@ -219,7 +213,6 @@ test(`engine-patterns`, async function(t) {
 			`*.js`
 		]
 	});
-	filter.before();
 	files = await filter({}, files);
 	
 	// Compare files.
@@ -255,7 +248,6 @@ test(`engine-options`, async function(t) {
 			extended: true
 		}
 	});
-	filter.before();
 	files = await filter({}, files);
 	
 	// Compare files.
@@ -295,7 +287,6 @@ test(`engine-patternOptions:all`, async function(t) {
 			extended: true
 		}
 	});
-	filter.before();
 	files = await filter({}, files);
 	
 	// Compare files.
