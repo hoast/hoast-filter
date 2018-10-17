@@ -1,7 +1,30 @@
 // Dependency modules.
-const test = require(`ava`);
+const Hoast = require(`hoast`),
+	test = require(`ava`);
 // Custom module.
 const Filter = require(`../library`);
+
+/**
+ * Emulates a simplified Hoast process for testing purposes.
+ * @param {Object} options Hoast options.
+ * @param {Function} mod Module function.
+ * @param {Array of objects} files The files to process and return.
+ */
+const emulateHoast = async function(options, mod, files) {
+	const hoast = Hoast(__dirname, options);
+	
+	if (mod.before) {
+		mod.before(hoast);
+	}
+	
+	files = await mod(hoast, files);
+	
+	if (mod.after) {
+		mod.after(hoast);
+	}
+	
+	return files;
+};
 
 // Test patterns as a string.
 test(`pattern`, async function(t) {
@@ -18,10 +41,13 @@ test(`pattern`, async function(t) {
 	}];
 	
 	// Test module.
-	const filter = Filter({
-		patterns: `*.css`
-	});
-	files = await filter({}, files);
+	files = await emulateHoast(
+		{},
+		Filter({
+			patterns: `*.css`
+		}),
+		files
+	);
 	
 	// Compare files.
 	t.deepEqual(files, filesOutcome);
@@ -46,13 +72,16 @@ test(`patterns`, async function(t) {
 	}];
 	
 	// Test module.
-	const filter = Filter({
-		patterns: [
-			`*.css`,
-			`*.html`
-		]
-	});
-	files = await filter({}, files);
+	files = await emulateHoast(
+		{},
+		Filter({
+			patterns: [
+				`*.css`,
+				`*.html`
+			]
+		}),
+		files
+	);
 	
 	// Compare files.
 	t.deepEqual(files, filesOutcome);
@@ -73,13 +102,16 @@ test(`options`, async function(t) {
 	}];
 	
 	// Test module.
-	const filter = Filter({
-		patterns: `?.css`,
-		patternOptions: {
-			extended: true
-		}
-	});
-	files = await filter({}, files);
+	files = await emulateHoast(
+		{},
+		Filter({
+			patterns: `?.css`,
+			patternOptions: {
+				extended: true
+			}
+		}),
+		files
+	);
 	
 	// Compare files.
 	t.deepEqual(files, filesOutcome);
@@ -104,17 +136,20 @@ test(`patternOptions:all`, async function(t) {
 	}];
 	
 	// Test module.
-	const filter = Filter({
-		patterns: [
-			`*`,
-			`!(*.css)`
-		],
-		patternOptions: {
-			all: true,
-			extended: true
-		}
-	});
-	files = await filter({}, files);
+	files = await emulateHoast(
+		{},
+		Filter({
+			patterns: [
+				`*`,
+				`!(*.css)`
+			],
+			patternOptions: {
+				all: true,
+				extended: true
+			}
+		}),
+		files
+	);
 	
 	// Compare files.
 	t.deepEqual(files, filesOutcome);
@@ -137,12 +172,15 @@ test(`engine`, async function(t) {
 	}];
 	
 	// Test module.
-	const filter = Filter({
-		engine: function(file) {
-			return file.path === `a.css`;
-		}
-	});
-	files = await filter({}, files);
+	files = await emulateHoast(
+		{},
+		Filter({
+			engine: function(file) {
+				return file.path === `a.css`;
+			}
+		}),
+		files
+	);
 	
 	// Compare files.
 	t.deepEqual(files, filesOutcome);
@@ -167,14 +205,17 @@ test(`engine-pattern`, async function(t) {
 	}];
 	
 	// Test module.
-	const filter = Filter({
-		engine: function(file) {
-			t.true([ `a.css`, `c.js` ].indexOf(file.path) >= 0);
-			return file.path === `a.css`;
-		},
-		patterns: `*.html`
-	});
-	files = await filter({}, files);
+	files = await emulateHoast(
+		{},
+		Filter({
+			engine: function(file) {
+				t.true([ `a.css`, `c.js` ].indexOf(file.path) >= 0);
+				return file.path === `a.css`;
+			},
+			patterns: `*.html`
+		}),
+		files
+	);
 	
 	// Compare files.
 	t.deepEqual(files, filesOutcome);
@@ -203,17 +244,20 @@ test(`engine-patterns`, async function(t) {
 	}];
 	
 	// Test module.
-	const filter = Filter({
-		engine: function(file) {
-			t.true([ `a.css`, `d.md` ].indexOf(file.path) >= 0);
-			return file.path === `a.css`;
-		},
-		patterns: [
-			`*.html`,
-			`*.js`
-		]
-	});
-	files = await filter({}, files);
+	files = await emulateHoast(
+		{},
+		Filter({
+			engine: function(file) {
+				t.true([ `a.css`, `d.md` ].indexOf(file.path) >= 0);
+				return file.path === `a.css`;
+			},
+			patterns: [
+				`*.html`,
+				`*.js`
+			]
+		}),
+		files
+	);
 	
 	// Compare files.
 	t.deepEqual(files, filesOutcome);
@@ -238,17 +282,20 @@ test(`engine-options`, async function(t) {
 	}];
 	
 	// Test module.
-	const filter = Filter({
-		engine: function(file) {
-			t.true([ `a.css`, `c.js` ].indexOf(file.path) >= 0);
-			return file.path === `a.css`;
-		},
-		patterns: `?.html`,
-		patternOptions: {
-			extended: true
-		}
-	});
-	files = await filter({}, files);
+	files = await emulateHoast(
+		{},
+		Filter({
+			engine: function(file) {
+				t.true([ `a.css`, `c.js` ].indexOf(file.path) >= 0);
+				return file.path === `a.css`;
+			},
+			patterns: `?.html`,
+			patternOptions: {
+				extended: true
+			}
+		}),
+		files
+	);
 	
 	// Compare files.
 	t.deepEqual(files, filesOutcome);
@@ -273,21 +320,24 @@ test(`engine-patternOptions:all`, async function(t) {
 	}];
 	
 	// Test module.
-	const filter = Filter({
-		engine: function(file) {
-			t.true([ `a.css`, `c.html` ].indexOf(file.path) >= 0);
-			return file.path === `a.css`;
-		},
-		patterns: [
-			`b.*`,
-			`*.html`
-		],
-		patternOptions: {
-			all: true,
-			extended: true
-		}
-	});
-	files = await filter({}, files);
+	files = await emulateHoast(
+		{},
+		Filter({
+			engine: function(file) {
+				t.true([ `a.css`, `c.html` ].indexOf(file.path) >= 0);
+				return file.path === `a.css`;
+			},
+			patterns: [
+				`b.*`,
+				`*.html`
+			],
+			patternOptions: {
+				all: true,
+				extended: true
+			}
+		}),
+		files
+	);
 	
 	// Compare files.
 	t.deepEqual(files, filesOutcome);
