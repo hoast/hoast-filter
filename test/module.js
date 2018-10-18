@@ -14,13 +14,13 @@ const emulateHoast = async function(options, mod, files) {
 	const hoast = Hoast(__dirname, options);
 	
 	if (mod.before) {
-		mod.before(hoast);
+		await mod.before(hoast);
 	}
 	
 	files = await mod(hoast, files);
 	
 	if (mod.after) {
-		mod.after(hoast);
+		await mod.after(hoast);
 	}
 	
 	return files;
