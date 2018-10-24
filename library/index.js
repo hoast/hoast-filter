@@ -25,7 +25,7 @@ module.exports = function(options) {
 			await Promise.all(files.map(async function(file) {
 				debug(`Filtering file '${file.path}'.`);
 				// First check if expression are given then with the expressions check whether it should be filtered.
-				if (this.expressions && hoast.helper.match(file.path, this.expressions, options.patternOptions.all)) {
+				if (this.expressions && hoast.helpers.matchExpressions(file.path, this.expressions, options.patternOptions.all)) {
 					debug(`File path valid for skipping.`);
 					return true;
 				}
@@ -45,7 +45,7 @@ module.exports = function(options) {
 			// Filter using the expressions.
 			filtered = files.filter(function(file) {
 				debug(`Filtering file '${file.path}'.`);
-				return hoast.helper.match(file.path, this.expressions, options.patternOptions.all);
+				return hoast.helpers.matchExpressions(file.path, this.expressions, options.patternOptions.all);
 			}, mod);
 		}
 		debug(`Finished filtering files.`);
@@ -56,7 +56,7 @@ module.exports = function(options) {
 	mod.before = function(hoast) {
 		// Parse glob patterns into regular expressions.
 		if (options.patterns) {
-			this.expressions = hoast.helper.parse(options.patterns, options.patternOptions, true);
+			this.expressions = hoast.helpers.parsePatterns(options.patterns, options.patternOptions, true);
 			debug(`Patterns parsed into expressions: ${this.expressions}.`);
 		}
 	};
