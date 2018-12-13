@@ -155,7 +155,3 @@ Hoast(__dirname)
 ```
 
 > In the example any files within the layouts directory will be filtered out if they do not have the `.hbs` extension. All other files outside the layouts directory will remain part of the files array and be processed further.
-
-## License
-
-[ISC license](https://github.com/hoast/hoast-filter/blob/master/LICENSE)
